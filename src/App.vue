@@ -1,26 +1,56 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<template lang='pug'>
+.wrapper
+  post-form
+  post-list(:posts='posts')
+
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import PostForm from '@/components/PostForm';
+import PostList from '@/components/PostList';
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
+    components:{
+        PostForm,PostList
+    },
+data(){
+    return{
+        likes:0,
+        posts:[
+            {time:'14:30', deal:'visit shop',id:1},
+            {time:'00:00',deal:'sleep',id:2},
+            {time:'00:00',deal:'sleep',id:3},    
+            ],
+        DoTime:'',
+        DoDeal:'',
+    }
+},
+methods:{
+    postAmountAdd(){
+       
+    },
+    newPost(){
+        this.likes++;
+        this.posts.push({time:this.DoTime, deal:this.DoDeal,id:this.likes+3});
+        this.DoTime = '';
+        this.DoDeal = '';
+       
+    },
+    deletePost(){
+        console.log(this.posts)
+    }
+
+}
+
+     
+ 
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.post{
+    border: solid green 2px;
+    width: 150px;
+    height: 61px;
 }
 </style>
