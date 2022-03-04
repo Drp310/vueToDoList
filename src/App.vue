@@ -1,8 +1,12 @@
 <template lang='pug'>
 .wrapper
-  post-form
-  post-list(:posts='posts')
-
+  post-form(:name='name'
+            @create='newPost'
+  )
+  post-list(:posts='posts'
+            @deletePost='deletePost'
+  )
+ 
 </template>
 
 <script>
@@ -21,23 +25,23 @@ data(){
             {time:'00:00',deal:'sleep',id:2},
             {time:'00:00',deal:'sleep',id:3},    
             ],
-        DoTime:'',
-        DoDeal:'',
+        name:'Arseniy',
     }
 },
 methods:{
     postAmountAdd(){
        
     },
-    newPost(){
+    newPost(post){
         this.likes++;
-        this.posts.push({time:this.DoTime, deal:this.DoDeal,id:this.likes+3});
-        this.DoTime = '';
-        this.DoDeal = '';
+        this.posts.push(post);
+        
        
     },
-    deletePost(){
-        console.log(this.posts)
+    deletePost(post){
+        console.log(post.time)
+        this.posts = this.posts.filter(i=>i.id!==post.id)
+        
     }
 
 }
@@ -50,7 +54,7 @@ methods:{
 <style>
 .post{
     border: solid green 2px;
-    width: 150px;
+    width: 500px;
     height: 61px;
 }
 </style>
